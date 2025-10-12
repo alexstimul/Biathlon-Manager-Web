@@ -1,0 +1,10 @@
+.race {
+    margin-top: 10px;
+
+    &__header {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

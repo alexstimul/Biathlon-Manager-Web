@@ -1,0 +1,32 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+
+    &__title {
+        color: #1c398e;
+    }
+
+    &__themeChanger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 36px;
+        height: 36px;
+        border-radius: 5px;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #51a2ff;
+            color: #fff;
+        }
+
+        &_icon {
+            width: 16px;
+            height: 16px;
+            color: #000;
+        }
+    }
+}

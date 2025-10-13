@@ -1,20 +1,14 @@
-import Race from "./pages/Race/Race"
+import { Outlet } from "react-router-dom"
+import styles from "./App.module.scss"
+import LeftSidebar from "./components/LeftSidebar/LeftSidebar"
 
 const App = () => (
-    // <div className={styles.main}>Biathlon manager is coming...</div>
-    <Race laps={3} athletes={[
-        {
-            id: "1",
-            name: "Alex Lopez",
-            speed: {
-                flat: 1,
-                uphill: 0.5,
-                downhill: 1.5,
-            },
-            stamina: 100,
-            shootingAccuracy:90
-        }
-    ]} />
+    <div className={styles.app}>
+        <LeftSidebar />
+        <div>
+            <Outlet />
+        </div>
+    </div>
 )
 
 export default App

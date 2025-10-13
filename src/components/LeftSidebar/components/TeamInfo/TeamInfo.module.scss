@@ -1,0 +1,49 @@
+.container {
+    width: 166px;
+    height: 64px;
+    padding: 12px;
+    background-color: #ecfeff; // добавить градиени #ecfeff
+
+    border-width: 1px;
+    border-color: #bedbff;
+    border-style: solid;
+    border-radius: 10px;
+    margin-bottom: 24px;
+}
+
+.name {
+    color: #45556c;
+    font-size: .875rem;
+    margin-bottom: 4px;
+    margin-top: 0px;
+}
+
+.teamInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__season {
+        &_finance {
+            margin: 0;
+            color: #1c398e;
+        }
+
+        &_currentSeason {
+            margin: 0;
+            color: #62748e;
+            font-size: 0.75rem;
+        }
+    }
+
+    &__position {
+        padding: 2px 8px;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 10px;
+        white-space: nowrap;
+        color: #fff;
+        font-size: 0.75rem;
+        background-color: #1c398e;
+    }
+}

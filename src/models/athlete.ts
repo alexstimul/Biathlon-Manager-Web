@@ -9,12 +9,19 @@ export interface ShootingAccuracy {
   stand: number
 }
 
+export interface AthleteSkills {
+  speed: Speed
+  stamina: number // 1-100
+  shootingAccuracy: ShootingAccuracy
+}
+
 export interface Athlete {
   id: string
   firstName: string
   lastName: string
   county: string // RUS, FRA, GET, etc.
-  speed: Speed
-  stamina: number // 1-100
-  shootingAccuracy: ShootingAccuracy
+  age: number
+  raiting: number
+  type: string
+  skills: AthleteSkills
 }

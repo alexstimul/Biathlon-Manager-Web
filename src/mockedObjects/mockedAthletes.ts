@@ -4,6 +4,9 @@ import { Athlete, ShootingAccuracy, Speed } from "../models/athlete"
 export const createAthlete = (
     firstName = "Иван",
     lastName = "Иванов",
+    age = 24,
+    raiting = 90,
+    type = "Стрелок",
     county = "rus",
     speed: Speed = {
         flat: 5,
@@ -19,10 +22,15 @@ export const createAthlete = (
     id: uuid(),
     firstName,
     lastName,
+    age,
+    raiting,
+    type,
     county: county.toUpperCase(),
-    speed,
-    stamina,
-    shootingAccuracy
+    skills: {
+        speed,
+        stamina,
+        shootingAccuracy
+    }
 })
 
 export const mockedAthlete = createAthlete()

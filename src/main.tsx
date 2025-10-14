@@ -17,6 +17,7 @@ import Finance from "./pages/Finance/Finance.tsx"
 import Transfers from "./pages/Transfers/Transfers.tsx"
 import Achivments from "./pages/Achivments/Achivments.tsx"
 import Settings from "./pages/Settings/Settings.tsx"
+import Athlete from "./pages/Athlete/Athlete.tsx"
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: "/settings",
         element: <Settings />
+      },
+      {
+        path: "/athlete/:athleteId",
+        element: <Athlete />
       }
     ]
   }

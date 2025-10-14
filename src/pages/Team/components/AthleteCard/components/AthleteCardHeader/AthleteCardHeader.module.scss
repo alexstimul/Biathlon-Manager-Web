@@ -1,0 +1,73 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.separator {
+    margin-right: 5px;
+}
+
+.athlete {
+    &__raiting { // todo вынести в отдельный миксин, т.к. дублируется полностью
+        padding: 2px 8px;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 10px;
+        white-space: nowrap;
+        color: #fff;
+        font-size: 0.75rem;
+        background-color: #1c398e;
+    }
+
+    &__info {
+        display: flex;
+        align-items: center;
+    }
+
+    &__name {
+        font-size: 16px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+
+        span {
+            margin-right: 5px;
+        }
+
+        &_eye {
+            width: 16px;
+            height: 16px;
+            visibility: hidden;
+        }
+
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+
+            .athlete__name_eye {
+                visibility: visible;
+            }
+        }
+    }
+
+    &__ageCountry {
+        display: flex;
+        align-items: center;
+    }
+
+    &__age {
+        margin-right: 5px;
+    }
+
+    &__picture {
+        width: 56px;
+        height: 56px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: #8ec5ff;
+        margin-right: 10px;
+    }
+}

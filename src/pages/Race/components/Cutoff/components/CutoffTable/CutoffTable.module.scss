@@ -1,0 +1,28 @@
+.header {
+  text-align: center;
+  color: #ffffff;
+  background-color: #155dfc;
+  padding: 8px 4px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 8fr 1fr 1fr;
+  padding: 8px 12px;
+  border: 2px solid #e2e8f0;
+  gap: 10px;
+
+  &__position {
+    padding: 2px 8px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 10px;
+    white-space: nowrap;
+    text-align: center;
+    color: #fff;
+    font-size: 0.75rem;
+    background-color: #1c398e;
+  }
+}

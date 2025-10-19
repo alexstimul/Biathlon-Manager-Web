@@ -9,7 +9,7 @@ interface AthletesProps {
 const Athletes = ({ athletes }: AthletesProps) => {
     return (
         <div className={styles.athletes}>
-            {athletes.slice(0, 1).map(athlete => <AthleteCard athlete={athlete} />)}
+            {athletes.map(athlete => <AthleteCard key={athlete.id} athlete={athlete} />)}
         </div>
     )
 }

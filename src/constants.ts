@@ -1,5 +1,5 @@
 import { ForwardRefExoticComponent } from "react"
-import { Award, Building2, Calendar, Dumbbell, Flag, House, LucideProps, RefreshCw, Settings, Trophy, User, Users, Wallet } from "lucide-react"
+import { Award, Building2, Calendar, Dumbbell, Flag, House, LucideProps, RefreshCw, Settings, Trophy, User, Wallet } from "lucide-react"
 
 export const SHOOTING_RANGE_DISTANCE = 50 // дистанция стрельбы в метрах
 export const SHOOTING_RANGE_TARGET_COUNT = 5 // количество целей на огневом рубеже

@@ -1,0 +1,11 @@
+.progressbar {
+  background-color: #e2e8f0;
+  height: 8px;
+  border-radius: 4px;
+
+  &__value {
+    background: linear-gradient(to right, #ff6467, #e7000b);
+    height: 8px;
+    border-radius: 4px;
+  }
+}

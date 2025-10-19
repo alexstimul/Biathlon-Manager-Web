@@ -3,36 +3,3 @@
     flex-direction: column;
     justify-content: space-between;
 }
-
-.skills {
-    &__item {
-        margin-bottom: 12px;
-
-        &__header {
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: #45556c;
-
-            &_icon {
-                width: 16px;
-                height: 16px;
-                color: #ff0000;
-                margin-right: 5px;
-            }
-        }
-
-        &_progressbar {
-            background-color: #e2e8f0;
-            height: 8px;
-            border-radius: 4px;
-        }
-
-        &_value {
-            background: linear-gradient(to right, #ff6467, #e7000b);
-            height: 8px;
-            border-radius: 4px;
-        }
-    }
-}

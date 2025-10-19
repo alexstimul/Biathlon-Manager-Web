@@ -1,0 +1,8 @@
+.cutoff {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid #bfbfbf;
+  border-radius: 10px;
+  padding: 24px;
+}

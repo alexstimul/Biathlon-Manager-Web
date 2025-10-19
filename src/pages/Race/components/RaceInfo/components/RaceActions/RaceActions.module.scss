@@ -1,0 +1,18 @@
+.action {
+  width: 100%;
+  background-color: #1c398e;
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  &__text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}

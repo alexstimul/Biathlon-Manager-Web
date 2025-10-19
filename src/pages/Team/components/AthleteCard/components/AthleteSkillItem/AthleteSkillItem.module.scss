@@ -1,0 +1,18 @@
+.item {
+  margin-bottom: 12px;
+
+  &__header {
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #45556c;
+
+    &_icon {
+      width: 16px;
+      height: 16px;
+      color: #ff0000;
+      margin-right: 5px;
+    }
+  }
+}

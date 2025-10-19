@@ -1,14 +1,13 @@
 import { mockedAthletes } from "../../mockedObjects/mockedAthletes"
 import Athletes from "./components/Athletes/Athletes"
-import styles from "./Team.module.scss"
+import PageHeader from "../../components/PageHeader/PageHeader.tsx";
 
 const Team = () => {
     return (
-        <div>
-            <h2 className={styles.header}>Моя команда</h2>
-            <p className={styles.subHeader}>Упарвляйте спортсменами вашей команды</p>
+        <>
+            <PageHeader text="Моя команда" subText="Упарвляйте спортсменами вашей команды" />
             <Athletes athletes={mockedAthletes} />
-        </div>
+        </>
     )
 }
 

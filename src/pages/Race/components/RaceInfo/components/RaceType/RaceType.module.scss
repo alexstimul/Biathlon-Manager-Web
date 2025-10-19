@@ -1,0 +1,18 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+
+  // todo вынести в отдельный компонет со стилями, уже 3 повторения
+  &__raceType {
+    padding: 2px 8px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 10px;
+    white-space: nowrap;
+    color: #fff;
+    font-size: 0.75rem;
+    background-color: #1c398e;
+  }
+}

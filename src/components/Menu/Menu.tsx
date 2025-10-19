@@ -7,7 +7,7 @@ const Menu = () => {
         <nav className={styles.menu}>
             <ul>
                 {menuItems.map(menuItem => (
-                    <MenuItem item={menuItem} />
+                    <MenuItem key={menuItem.id} item={menuItem} />
                 ))}
             </ul>
         </nav>

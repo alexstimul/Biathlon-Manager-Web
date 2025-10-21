@@ -1,5 +1,6 @@
 import { v4 as uuid } from "uuid"
 import { Athlete, ShootingAccuracy, Speed } from "../models/athlete"
+import {ShootingRangePosition} from "../models/models.ts";
 
 export const createAthlete = (
     firstName = "Иван",
@@ -15,8 +16,8 @@ export const createAthlete = (
     },
     stamina = 100,
     shootingAccuracy: ShootingAccuracy = {
-        prone: 85,
-        stand: 85
+        [ShootingRangePosition.Prone]: 85,
+        [ShootingRangePosition.Standing]: 85
     }
 ): Athlete => ({
     id: uuid(),
@@ -29,7 +30,11 @@ export const createAthlete = (
     skills: {
         speed,
         stamina,
-        shootingAccuracy
+        shootingAccuracy,
+        shootingTime: {
+            [ShootingRangePosition.Prone]: 10,
+            [ShootingRangePosition.Standing]: 10
+        }
     }
 })
 

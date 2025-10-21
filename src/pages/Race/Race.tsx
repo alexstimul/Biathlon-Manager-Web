@@ -11,19 +11,65 @@ import PageHeader from "../../components/PageHeader/PageHeader.tsx";
 import RaceInfo from "./components/RaceInfo/RaceInfo.tsx";
 import Cutoff from "./components/Cutoff/Cutoff.tsx";
 import {mockedAthletes} from "../../mockedObjects/mockedAthletes.ts";
+import {useRaceManager} from "../../hooks/useRaceManager.ts";
 
 interface RaceProps {
   athletes: Athlete[]
   laps: number
 }
 
+/*
+onRaceStart?: (state: RaceManagerState) => void
+onRaceFinish?: (state: RaceManagerState) => void
+onCheckpoint?: (record: CheckpointRecord, state: RaceManagerState) => void
+onRankingChange?: (rankings: RaceRanking[], state: RaceManagerState) => void
+onShootingStart?: (athlete: Athlete, position: ShootingRangePosition, state: RaceManagerState) => void
+onShootingEnd?: (athlete: Athlete, missedShots: number, state: RaceManagerState) => void
+onLapComplete?: (athlete: Athlete, lap: number, time: number, state: RaceManagerState) => void
+onStateUpdate?: (state: RaceManagerState) => void
+* */
+
 const Race = ({ athletes, laps }: RaceProps) => {
+    const raceManager = useRaceManager(
+        getTestTrack(),
+        mockedAthletes.slice(0, 1),
+        {
+            onRaceStart: (state) => {
+                console.log(`Гонка началась для ${state.athletesStates.length} спортсменов`)
+            },
+            onRaceFinish: (state) => {
+                console.log(`Гонка завершилась для ${state.athletesStates.length} спортсменов`)
+            },
+            onRankingChange: (rankings, state) => {
+                console.log("Изменилась иерархия", rankings)
+            },
+        },
+        {
+            onStart: (state) => {
+                console.log(`Выехал ${state.athlete.firstName} ${state.athlete.lastName}`)
+            },
+            onFinish: (state) => {
+                console.log(`Финишировал ${state.athlete.firstName} ${state.athlete.lastName} за ${formatMilliseconds(state.raceTime)}`)
+                console.log(state)
+            },
+            onLapComplete: (state) => {
+                console.log(`${state.athlete.firstName} ${state.athlete.lastName} прошел круг`)
+            },
+            onCheckpoint: (state) => {
+                console.log(`${state.athlete.firstName} ${state.athlete.lastName} прошел какой-то чекпоинт`)
+            }
+        }
+    )
+
+
     const handleStartRace = () => {
         console.log("Start race")
+        raceManager.start()
     }
 
     const handlePauseRace = () => {
         console.log("Pause race")
+        raceManager.pause()
     }
 
     return (

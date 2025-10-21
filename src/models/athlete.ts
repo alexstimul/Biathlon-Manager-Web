@@ -1,3 +1,5 @@
+import {ShootingRangePosition} from "./models.ts";
+
 export interface Speed {
   flat: number // м/с
   uphill: number
@@ -5,14 +7,15 @@ export interface Speed {
 }
 
 export interface ShootingAccuracy {
-  prone: number
-  stand: number
+  [ShootingRangePosition.Prone]: number
+  [ShootingRangePosition.Standing]: number
 }
 
 export interface AthleteSkills {
   speed: Speed
   stamina: number // 1-100
   shootingAccuracy: ShootingAccuracy
+  shootingTime: ShootingAccuracy
 }
 
 export interface Athlete {

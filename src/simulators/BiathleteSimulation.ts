@@ -18,6 +18,7 @@ export class BiathleteSimulation {
     private readonly sectors: TrackSector[]
     private callbacks: AthleteCallbacks
     private animationFrameId: number | null = null
+    private lastUpdateTime: number
 
     public readonly startDelay: number = 0 // задержка старта для этого спортсмена
 
@@ -28,6 +29,7 @@ export class BiathleteSimulation {
         this.sectors = this.buildFullSectorSequence()
         this.state = this.createInitialState()
         this.callbacks = callbacks
+        this.lastUpdateTime = 0
 
         this.updateV2 = this.updateV2.bind(this)
     }
@@ -49,12 +51,13 @@ export class BiathleteSimulation {
             movementTime: 0,
             shootingTime: 0,
             penaltyTime: 0,
+            realTime: 0,
             distanceCovered: 0,
             completedCheckpoints: [],
             lapTimes: [],
             sectorTimes: Array(this.track.lapCount).fill(null).map(() => []),
             position: 0,
-            speedMultiplier: 100,
+            speedMultiplier: 2,
             lastSectorChangeTime: 0
         }
     }
@@ -63,7 +66,7 @@ export class BiathleteSimulation {
         if (this.state.isRunning) return
 
         this.state.isRunning = true
-        this.state.lastSectorChangeTime = performance.now()
+        this.lastUpdateTime = performance.now()
         this.callbacks.onStart?.(this.state)
 
         this.updateV2()
@@ -82,8 +85,8 @@ export class BiathleteSimulation {
 
         this.animationFrameId = requestAnimationFrame(this.updateV2)
         const currentTime = performance.now()
-        const deltaTime = (currentTime - this.state.lastSectorChangeTime) * this.state.speedMultiplier
-        this.state.lastSectorChangeTime = currentTime
+        const deltaTime = (currentTime - this.lastUpdateTime) * this.state.speedMultiplier
+        this.lastUpdateTime = currentTime
 
         // Обновляем общее время гонки для этого спортсмена
         this.state.raceTime += deltaTime
@@ -128,6 +131,7 @@ export class BiathleteSimulation {
         this.state.distanceCovered += distance
         this.state.netTime += deltaTime
         this.state.movementTime += deltaTime
+        this.state.realTime = (this.state.distanceCovered / 6) * 1000 // todo вынести 6 в переменну. И расчет реальной скорости в отдельный метод
 
         if (isPenaltyLoop) {
             this.state.penaltyTime += deltaTime
@@ -144,7 +148,7 @@ export class BiathleteSimulation {
         const baseSpeed = this.athlete.skills.speed[sector.terrainType]
         const terrainMultiplier = sector.speedMultiplier
         const staminaMultiplier = 0.8 + (0.4 * this.athlete.skills.stamina)
-        const effectiveSpeed = baseSpeed * terrainMultiplier * staminaMultiplier * this.state.speedMultiplier
+        const effectiveSpeed = 6 * this.state.speedMultiplier
 
         return (effectiveSpeed * deltaTime) / 1000
     }
@@ -154,10 +158,10 @@ export class BiathleteSimulation {
         const remainingDistance = this.state.progressInCurrentSector - currentSector.length
 
         // Фиксируем время прохождения сектора
-        const sectorTime = this.state.raceTime - this.state.lastSectorChangeTime
-        if (this.state.currentLap <= this.track.lapCount) {
-            this.state.sectorTimes[this.state.currentLap - 1].push(sectorTime)
-        }
+        // const sectorTime = this.state.raceTime - this.state.lastSectorChangeTime
+        // if (this.state.currentLap <= this.track.lapCount) {
+        //     this.state.sectorTimes[this.state.currentLap - 1].push(sectorTime)
+        // }
 
         // Создаем запись чекпоинта для специальных секторов
         if (currentSector.specialType !== SectorSpecialType.Regular) {

@@ -47,10 +47,12 @@ const Race = ({ athletes, laps }: RaceProps) => {
         {
             onStart: (state) => {
                 console.log(`Выехал ${state.athlete.firstName} ${state.athlete.lastName}`)
+                console.log(new Date().toLocaleString("ru-RU"))
             },
             onFinish: (state) => {
                 console.log(`Финишировал ${state.athlete.firstName} ${state.athlete.lastName} за ${formatMilliseconds(state.raceTime)}`)
                 console.log(state)
+                console.log(new Date().toLocaleString("ru-RU"))
             },
             // onLapComplete: (state) => {
             //     console.log(`${state.athlete.firstName} ${state.athlete.lastName} прошел круг`)
@@ -60,7 +62,7 @@ const Race = ({ athletes, laps }: RaceProps) => {
             //     console.log(`Чекпоинт`, sector)
             // },
             onSectorChange: (sector, state) => {
-                console.log(`${state.athlete.firstName} ${state.athlete.lastName} -> ${sector.name}`)
+                console.log(`${state.athlete.firstName} ${state.athlete.lastName} -> ${sector.name}. Время: ${formatMilliseconds(state.realTime)}`)
             }
         }
     )

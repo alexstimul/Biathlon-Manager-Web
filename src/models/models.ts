@@ -87,6 +87,7 @@ export interface AthleteRaceState {
     movementTime: number // время только в движении
     shootingTime: number // время только на стрельбе
     penaltyTime: number // время на штрафных кругах
+    realTime: number // симуляционное небо (м/с)
     distanceCovered: number
     completedCheckpoints: CheckpointRecord[]
     lapTimes: number[]

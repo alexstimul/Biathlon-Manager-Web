@@ -51,6 +51,8 @@ export class RaceManager {
         this.lastUpdateTime = this.state.startTime
         this.globalRaceTime = 0
 
+        this.simulations[0].start()
+
         this.callbacks.onRaceStart?.(this.state)
         this.update()
     }
@@ -67,11 +69,11 @@ export class RaceManager {
         this.state.currentTime = this.globalRaceTime
 
         // Обновляем всех спортсменов с передачей общего времени гонки
-        this.simulations.forEach(simulation => {
-            simulation.update(deltaTime, this.globalRaceTime, (sector, state) => {
-                this.handleCheckpoint(sector, state)
-            })
-        })
+        // this.simulations.forEach(simulation => {
+        //     simulation.update(deltaTime, this.globalRaceTime, (sector, state) => {
+        //         this.handleCheckpoint(sector, state)
+        //     })
+        // })
 
         this.updateRankings()
 

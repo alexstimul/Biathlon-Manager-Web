@@ -99,8 +99,9 @@ export interface AthleteRaceState {
 export interface AthleteCallbacks {
     onStart?: (state: AthleteRaceState) => void
     onFinish?: (state: AthleteRaceState) => void
-    onCheckpoint?: (state: AthleteRaceState) => void
+    onCheckpoint?: (sector: TrackSector,state: AthleteRaceState) => void
     onLapComplete?: (state: AthleteRaceState) => void
+    onSectorChange?: (sector: TrackSector, state: AthleteRaceState) => void
 }
 
 export interface CheckpointRecord {

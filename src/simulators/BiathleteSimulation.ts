@@ -16,8 +16,10 @@ export class BiathleteSimulation {
     private track: Track
     private readonly athlete: Athlete
     private readonly sectors: TrackSector[]
-    private readonly startDelay: number = 0 // задержка старта для этого спортсмена
     private callbacks: AthleteCallbacks
+    private animationFrameId: number | null = null
+
+    public readonly startDelay: number = 0 // задержка старта для этого спортсмена
 
     constructor(athlete: Athlete, track: Track, startDelay: number = 0, callbacks: AthleteCallbacks = {}) {
         this.athlete = athlete
@@ -26,6 +28,8 @@ export class BiathleteSimulation {
         this.sectors = this.buildFullSectorSequence()
         this.state = this.createInitialState()
         this.callbacks = callbacks
+
+        this.updateV2 = this.updateV2.bind(this)
     }
 
     private createInitialState(): AthleteRaceState {
@@ -50,8 +54,44 @@ export class BiathleteSimulation {
             lapTimes: [],
             sectorTimes: Array(this.track.lapCount).fill(null).map(() => []),
             position: 0,
-            speedMultiplier: 1,
+            speedMultiplier: 100,
             lastSectorChangeTime: 0
+        }
+    }
+
+    start(): void {
+        if (this.state.isRunning) return
+
+        this.state.isRunning = true
+        this.state.lastSectorChangeTime = performance.now()
+        this.callbacks.onStart?.(this.state)
+
+        this.updateV2()
+    }
+
+    pause(): void {
+        this.state.isRunning = false
+        if (this.animationFrameId) {
+            cancelAnimationFrame(this.animationFrameId)
+            this.animationFrameId = null
+        }
+    }
+
+    updateV2(): void {
+        if (!this.state.isRunning) return
+
+        this.animationFrameId = requestAnimationFrame(this.updateV2)
+        const currentTime = performance.now()
+        const deltaTime = (currentTime - this.state.lastSectorChangeTime) * this.state.speedMultiplier
+        this.state.lastSectorChangeTime = currentTime
+
+        // Обновляем общее время гонки для этого спортсмена
+        this.state.raceTime += deltaTime
+
+        if (this.state.isShooting) {
+            this.updateShooting(deltaTime)
+        } else {
+            this.updateMovement(deltaTime)
         }
     }
 
@@ -129,7 +169,7 @@ export class BiathleteSimulation {
             }
             this.state.completedCheckpoints.push(checkpoint)
             onCheckpoint?.(currentSector, this.state)
-            this.callbacks.onCheckpoint?.(this.state)
+            this.callbacks.onCheckpoint?.(currentSector, this.state)
         }
 
         // Обрабатываем специальные секторы
@@ -144,6 +184,8 @@ export class BiathleteSimulation {
         if (remainingDistance > 0 && this.state.currentSectorIndex < this.sectors.length) {
             this.state.progressInCurrentSector = remainingDistance
         }
+
+        this.callbacks.onSectorChange?.(currentSector, this.state)
 
         // Проверяем завершение круга
         const sectorsPerLap = this.track.sectors.length

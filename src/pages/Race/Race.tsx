@@ -52,11 +52,15 @@ const Race = ({ athletes, laps }: RaceProps) => {
                 console.log(`Финишировал ${state.athlete.firstName} ${state.athlete.lastName} за ${formatMilliseconds(state.raceTime)}`)
                 console.log(state)
             },
-            onLapComplete: (state) => {
-                console.log(`${state.athlete.firstName} ${state.athlete.lastName} прошел круг`)
-            },
-            onCheckpoint: (state) => {
-                console.log(`${state.athlete.firstName} ${state.athlete.lastName} прошел какой-то чекпоинт`)
+            // onLapComplete: (state) => {
+            //     console.log(`${state.athlete.firstName} ${state.athlete.lastName} прошел круг`)
+            // },
+            // onCheckpoint: (sector, state) => {
+            //     console.log(`${state.athlete.firstName} ${state.athlete.lastName} прошел какой-то чекпоинт`)
+            //     console.log(`Чекпоинт`, sector)
+            // },
+            onSectorChange: (sector, state) => {
+                console.log(`${state.athlete.firstName} ${state.athlete.lastName} -> ${sector.name}`)
             }
         }
     )

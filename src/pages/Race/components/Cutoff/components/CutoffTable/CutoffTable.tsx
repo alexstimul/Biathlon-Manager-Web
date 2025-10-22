@@ -16,6 +16,7 @@ const CutoffTable = (props: CutoffTableProps) => {
             {headerTitle && <TableHeader text={headerTitle} />}
             {athletes.map((athlete, position) => (
                 <TableRow
+                    key={athlete.id}
                     position={position + 1}
                     name={`${athlete.firstName} ${athlete.lastName}`}
                     country={athlete.county}
